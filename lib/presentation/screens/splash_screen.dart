@@ -1,6 +1,8 @@
+import 'package:ecommerce_project/presentation/screens/home_screen.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,6 +12,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    _moveToNextScreen();
+  }
+  
+  Future<void> _moveToNextScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+    Get.to(() => const HomeScreen() );
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
