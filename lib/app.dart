@@ -26,8 +26,6 @@ class _CraftyBayState extends State<CraftyBay> {
     );
   }
 
-
-
   TextTheme _textTheme() => const TextTheme(
       headlineLarge: TextStyle(
         fontSize: 32,
@@ -37,6 +35,15 @@ class _CraftyBayState extends State<CraftyBay> {
       headlineSmall: TextStyle(
           fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey));
   InputDecorationTheme _inputDecorationTheme() => InputDecorationTheme(
+        hintStyle: const TextStyle(
+          color: Colors.grey,
+          fontWeight: FontWeight.w400,
+        ),
+        labelStyle: const TextStyle(
+          color: AppColors.primaryColor,
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
+        ),
         border: _outlineInputBorder,
         enabledBorder: _outlineInputBorder,
         focusedBorder: _outlineInputBorder,
@@ -50,18 +57,18 @@ class _CraftyBayState extends State<CraftyBay> {
   final OutlineInputBorder _outlineInputBorder = const OutlineInputBorder(
       borderSide: BorderSide(color: AppColors.primaryColor));
   ElevatedButtonThemeData _elevatedButtonThemeData() => ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      fixedSize: const Size.fromWidth(double.maxFinite),
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      backgroundColor: AppColors.primaryColor,
-      foregroundColor: Colors.white,
-      textStyle: const TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 18,
-      ),
-    ),
-  );
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size.fromWidth(double.maxFinite),
+          padding: const EdgeInsets.symmetric(vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 18,
+          ),
+        ),
+      );
 }

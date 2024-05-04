@@ -12,8 +12,7 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-
-
+  final TextEditingController _emailTEController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -21,8 +20,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 180),
             const AppLogo(),
             const SizedBox(height: 16),
             Text(
@@ -35,7 +34,14 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               style: textTheme.headlineSmall,
             ),
             const SizedBox(height: 18),
-            TextFormField(),
+            TextFormField(
+              controller: _emailTEController,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                hintText: 'Email',
+                labelText: 'Email'
+              ),
+            ),
             const SizedBox(height: 18),
             ElevatedButton(
               onPressed: () {},
@@ -45,5 +51,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    _emailTEController.clear();
+    super.dispose();
   }
 }
