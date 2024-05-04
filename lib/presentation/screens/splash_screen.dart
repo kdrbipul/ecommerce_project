@@ -1,9 +1,6 @@
 import 'package:ecommerce_project/presentation/screens/email_verification_screen.dart';
-import 'package:ecommerce_project/presentation/screens/home_screen.dart';
-import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {

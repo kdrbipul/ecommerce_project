@@ -1,6 +1,4 @@
-import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
@@ -21,7 +19,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            const SizedBox(height: 180),
+            const SizedBox(height: 170),
             const AppLogo(),
             const SizedBox(height: 16),
             Text(

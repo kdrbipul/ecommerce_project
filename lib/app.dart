@@ -34,6 +34,7 @@ class _CraftyBayState extends State<CraftyBay> {
       ),
       headlineSmall: TextStyle(
           fontSize: 20, fontWeight: FontWeight.normal, color: Colors.grey));
+
   InputDecorationTheme _inputDecorationTheme() => InputDecorationTheme(
         hintStyle: const TextStyle(
           color: Colors.grey,
@@ -56,6 +57,7 @@ class _CraftyBayState extends State<CraftyBay> {
       );
   final OutlineInputBorder _outlineInputBorder = const OutlineInputBorder(
       borderSide: BorderSide(color: AppColors.primaryColor));
+
   ElevatedButtonThemeData _elevatedButtonThemeData() => ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           fixedSize: const Size.fromWidth(double.maxFinite),
