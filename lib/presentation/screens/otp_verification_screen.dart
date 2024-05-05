@@ -1,21 +1,42 @@
 import 'package:ecommerce_project/presentation/screens/complete_profile_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String email;
-  const OtpVerificationScreen({super.key, required this.email,});
+
+  const OtpVerificationScreen({
+    super.key,
+    required this.email,
+  });
 
   @override
-  State<OtpVerificationScreen> createState() =>
-      _OtpVerificationScreenState();
+  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpTEController = TextEditingController();
+  final _count = 10.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    timeDecrement();
+  }
+
+  void timeDecrement() async {
+    while (_count.value > 0) {
+      await Future.delayed(
+        const Duration(seconds: 1),
+      );
+      _count.value--;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -43,13 +64,27 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 const SizedBox(height: 18),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const CompleteProfileScreen(),);
+                    Get.to(
+                      () => const CompleteProfileScreen(),
+                    );
                   },
                   child: const Text('Next'),
                 ),
                 const SizedBox(height: 34),
                 buildResendCodeMessage(),
-                TextButton(onPressed: (){}, child: const Text('Resend Code'),),
+                Obx(() =>
+                  Visibility(
+                    visible: _count.value == 0,
+                    replacement: const SizedBox(),
+                    child: TextButton(
+                      onPressed: () {
+                        _count.value=10;
+                        timeDecrement();
+                      },
+                      child: const Text('Resend Code'),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -58,23 +93,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-
   Widget buildResendCodeMessage() {
-    return RichText(
-            text: const TextSpan(
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
-                children: [
-                  TextSpan(text: ('This code will be expire in')),
-                  TextSpan(
-                      text: ('100s'),
-                      style: TextStyle(color: AppColors.primaryColor))
-                ]),
-          );
+    return
+      Obx(() =>
+        RichText(
+          text:  TextSpan(
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            children: [
+              const TextSpan(
+                text: ('This code will be expire in '),
+              ),
+              TextSpan(
+                text: ("${_count.value}s"),
+                style: const TextStyle(color: AppColors.primaryColor),
+              ),
+            ],
+          ),
+        ),
+      );
+
   }
+
   Widget _buildPinField() {
     return PinCodeTextField(
       controller: _otpTEController,
