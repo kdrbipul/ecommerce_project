@@ -1,11 +1,13 @@
+import 'package:ecommerce_project/presentation/screens/complete_profile_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   final String email;
-  const OtpVerificationScreen({super.key, required this.email});
+  const OtpVerificationScreen({super.key, required this.email,});
 
   @override
   State<OtpVerificationScreen> createState() =>
@@ -18,33 +20,39 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 170),
-            const AppLogo(),
-            const SizedBox(height: 16),
-            Text(
-              'Enter Otp Code',
-              style: textTheme.headlineLarge,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 170),
+                const AppLogo(),
+                const SizedBox(height: 16),
+                Text(
+                  'Enter Otp Code',
+                  style: textTheme.headlineLarge,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'A 6 digit OTP code have been send',
+                  style: textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 18),
+                _buildPinField(),
+                const SizedBox(height: 18),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const CompleteProfileScreen(),);
+                  },
+                  child: const Text('Next'),
+                ),
+                const SizedBox(height: 34),
+                buildResendCodeMessage(),
+                TextButton(onPressed: (){}, child: const Text('Resend Code'),),
+              ],
             ),
-            const SizedBox(height: 6),
-            Text(
-              'A 4 digit OTP code have been send',
-              style: textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 18),
-            _buildPinField(),
-            const SizedBox(height: 18),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Next'),
-            ),
-            const SizedBox(height: 34),
-            buildResendCodeMessage(),
-            TextButton(onPressed: (){}, child: const Text('Resend Code'),),
-          ],
+          ),
         ),
       ),
     );
@@ -71,7 +79,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     return PinCodeTextField(
       controller: _otpTEController,
       keyboardType: TextInputType.number,
-      length: 4,
+      length: 6,
       obscureText: false,
       animationType: AnimationType.fade,
       pinTheme: PinTheme(
