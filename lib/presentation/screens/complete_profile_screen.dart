@@ -73,6 +73,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   TextFormField(
                     controller: _shippingAddressTEController,
                     keyboardType: TextInputType.text,
+                    maxLines: 3,
                     decoration: const InputDecoration(
                         hintText: 'Shipping Address',
                         labelText: 'Shipping Address'),
