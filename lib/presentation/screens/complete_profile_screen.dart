@@ -25,69 +25,76 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  const AppLogo(),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Complete Profile',
-                    style: textTheme.headlineLarge,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Get started with us with your details',
-                    style: textTheme.headlineSmall,
-                  ),
-                  const SizedBox(height: 18),
-                  TextFormField(
-                    controller: _firstNameTEController,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                        hintText: 'First Name', labelText: 'First Name'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _lastNameTEController,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                        hintText: 'Last Name', labelText: 'Last Name'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _mobileTEController,
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                        hintText: 'Mobile', labelText: 'Mobile'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _cityTEController,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                        hintText: 'City', labelText: 'City'),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _shippingAddressTEController,
-                    keyboardType: TextInputType.text,
-                    maxLines: 3,
-                    decoration: const InputDecoration(
-                        hintText: 'Shipping Address',
-                        labelText: 'Shipping Address'),
-                  ),
-                  const SizedBox(height: 38),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Next'),
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                const AppLogo(),
+                const SizedBox(height: 16),
+                Text(
+                  'Complete Profile',
+                  style: textTheme.headlineLarge,
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'Get started with us with your details',
+                  style: textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 18),
+                buildCompleteProfileForm(),
+                const SizedBox(height: 38),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Next'),
+                ),
+              ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildCompleteProfileForm() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _firstNameTEController,
+            keyboardType: TextInputType.text,
+            decoration: const InputDecoration(
+                hintText: 'First Name', labelText: 'First Name'),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _lastNameTEController,
+            keyboardType: TextInputType.text,
+            decoration: const InputDecoration(
+                hintText: 'Last Name', labelText: 'Last Name'),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _mobileTEController,
+            keyboardType: TextInputType.phone,
+            decoration:
+                const InputDecoration(hintText: 'Mobile', labelText: 'Mobile'),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _cityTEController,
+            keyboardType: TextInputType.text,
+            decoration:
+                const InputDecoration(hintText: 'City', labelText: 'City'),
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            controller: _shippingAddressTEController,
+            keyboardType: TextInputType.text,
+            maxLines: 3,
+            decoration: const InputDecoration(
+                hintText: 'Shipping Address', labelText: 'Shipping Address'),
+          ),
+        ],
       ),
     );
   }
