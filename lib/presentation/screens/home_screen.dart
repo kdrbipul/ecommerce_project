@@ -42,7 +42,53 @@ class _HomeScreenState extends State<HomeScreen> {
               onTapSeeAll: () {},
             ),
             const SizedBox(height: 16),
-
+            Card(
+              color: Colors.white,
+              child: SizedBox(
+                width: 130,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      color: AppColors.primaryColor.withOpacity(0.1),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SvgPicture.asset(AssetsPath.productShoeSvg),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Nike sports shoe 320k special edition',
+                            maxLines: 1,
+                            style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '\$30',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.primaryColor,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       )),
