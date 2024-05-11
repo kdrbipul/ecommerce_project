@@ -1,4 +1,3 @@
-import 'package:ecommerce_project/presentation/screens/email_verification_screen.dart';
 import 'package:ecommerce_project/presentation/screens/home_screen.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
