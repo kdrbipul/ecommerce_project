@@ -1,4 +1,6 @@
+import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Crafty Bay'),
+        title: SvgPicture.asset(AssetsPath.navLogoSvg),
       ),
     );
   }
