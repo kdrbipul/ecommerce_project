@@ -4,6 +4,7 @@ import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce_project/widgets/category_item.dart';
 import 'package:ecommerce_project/widgets/home_carousel_slider.dart';
 import 'package:ecommerce_project/widgets/section_header.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -34,13 +35,35 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "All Category",
               onTapSeeAll: () {},
             ),
-            const CategoryItem(),
+            const SizedBox(height: 16),
+            _buildCategoryListView(),
+            SectionHeader(
+              title: "Popular Product",
+              onTapSeeAll: () {},
+            ),
+            const SizedBox(height: 16),
+
           ],
         ),
       )),
     );
   }
 
+  Widget _buildCategoryListView() {
+    return SizedBox(
+      height: 120,
+      child: ListView.separated(
+        itemCount: 8,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return const CategoryItem();
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(width: 26);
+        },
+      ),
+    );
+  }
 
   Widget _buildSearchTextField() {
     return TextField(
