@@ -1,7 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
+import 'package:ecommerce_project/widgets/category_item.dart';
+import 'package:ecommerce_project/widgets/home_carousel_slider.dart';
+import 'package:ecommerce_project/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,46 +16,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchTEController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             _buildSearchTextField(),
-            const SizedBox(height: 16,),
-            CarouselSlider(
-              options: CarouselOptions(
-                height: 200.0,
-                viewportFraction: 1,
-              ),
-              items: [1, 2, 3, 4, 5].map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      alignment: Alignment.center,
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 5.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text(
-                        'text $i',
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            )
+            const SizedBox(height: 16),
+            const HomeCarouselSlider(),
+            const SizedBox(height: 16),
+            SectionHeader(
+              title: "All Category",
+              onTapSeeAll: () {},
+            ),
+            const CategoryItem(),
           ],
         ),
       )),
@@ -84,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
   AppBar _buildAppBar() {
     return AppBar(
       title: SvgPicture.asset(AssetsPath.navLogoSvg),
@@ -106,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
     );
   }
+
   @override
   void dispose() {
     _searchTEController.dispose();

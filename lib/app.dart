@@ -23,13 +23,23 @@ class _CraftyBayState extends State<CraftyBay> {
         textTheme: _textTheme(),
         inputDecorationTheme: _inputDecorationTheme(),
         elevatedButtonTheme: _elevatedButtonThemeData(),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-        )
+        appBarTheme: _appBarTheme(),
+        textButtonTheme: _textButtonTheme(),
       ),
     );
   }
+
+
+  TextButtonThemeData _textButtonTheme() => TextButtonThemeData(
+    style: TextButton.styleFrom(
+      foregroundColor: AppColors.primaryColor,
+    ),
+  );
+
+  AppBarTheme _appBarTheme() => const AppBarTheme(
+    backgroundColor: Colors.white,
+    foregroundColor: Colors.black,
+  );
 
   TextTheme _textTheme() => const TextTheme(
       headlineLarge: TextStyle(
