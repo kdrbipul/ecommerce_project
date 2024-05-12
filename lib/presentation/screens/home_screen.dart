@@ -1,12 +1,10 @@
-import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce_project/widgets/category_item.dart';
 import 'package:ecommerce_project/widgets/home_carousel_slider.dart';
+import 'package:ecommerce_project/widgets/product_card.dart';
 import 'package:ecommerce_project/widgets/section_header.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,87 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
               onTapSeeAll: () {},
             ),
             const SizedBox(height: 16),
-            Card(
-              color: Colors.white,
-              child: SizedBox(
-                width: 150,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 150,
-                      height: 150,
-                      color: AppColors.primaryColor.withOpacity(0.1),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset(AssetsPath.productShoeSvg),
-                      ),
-                    ),
-                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Nike sports shoe 320k special edition',
-                            maxLines: 1,
-                            style: TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey),
-                          ),
-                          Wrap(
-                            spacing: 17,
-                            alignment: WrapAlignment.start,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              const Text(
-                                '\$30',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.primaryColor,
-                                ),
-                              ),
-                              const Wrap(
-                                children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    '3.4',
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Card(
-                                color: AppColors.primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(2),
-                                  child: Icon(
-                                    Icons.favorite_border_outlined,
-                                    color: Colors.white,
-                                    size: 16,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
+            const ProductCard(),
           ],
         ),
       )),
