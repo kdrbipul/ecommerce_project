@@ -12,7 +12,9 @@ class CategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.to(() => const ProductListScreen(categoryName: 'Electronics'),);
+        Get.to(
+          () => const ProductListScreen(categoryName: 'Electronics'),
+        );
       },
       child: Column(
         children: [

@@ -1,21 +1,20 @@
 import 'package:ecommerce_project/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
-class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({super.key, required this.categoryName});
+class WishListScreen extends StatefulWidget {
+  const WishListScreen({super.key,});
 
-  final String categoryName;
 
   @override
-  State<ProductListScreen> createState() => _ProductListScreenState();
+  State<WishListScreen> createState() => _WishListScreenState();
 }
 
-class _ProductListScreenState extends State<ProductListScreen> {
+class _WishListScreenState extends State<WishListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(widget.categoryName),
+        title:  const Text('Wish List'),
       ),
       body: GridView.builder(
         itemCount: 18,

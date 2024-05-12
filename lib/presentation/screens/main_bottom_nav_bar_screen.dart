@@ -1,5 +1,6 @@
 import 'package:ecommerce_project/presentation/screens/category_list_screen.dart';
 import 'package:ecommerce_project/presentation/screens/home_screen.dart';
+import 'package:ecommerce_project/presentation/screens/wish_list_screen.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
     HomeScreen(),
     CategoryListScreen(),
     HomeScreen(),
-    HomeScreen(),
+    WishListScreen(),
   ];
 
   @override
