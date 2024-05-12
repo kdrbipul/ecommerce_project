@@ -40,11 +40,38 @@ class _HomeScreenState extends State<HomeScreen> {
               title: "Popular Product",
               onTapSeeAll: () {},
             ),
-            const SizedBox(height: 16),
-            const ProductCard(),
+            _buildProductListView(),
+            const SizedBox(height: 8),
+            SectionHeader(
+              title: "Special",
+              onTapSeeAll: () {},
+            ),
+            _buildProductListView(),
+            const SizedBox(height: 8),
+            SectionHeader(
+              title: "New",
+              onTapSeeAll: () {},
+            ),
+            _buildProductListView(),
           ],
         ),
       )),
+    );
+  }
+
+  Widget _buildProductListView() {
+    return SizedBox(
+      height: 225,
+      child: ListView.separated(
+        itemCount: 8,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return const ProductCard();
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const SizedBox(width: 8);
+        },
+      ),
     );
   }
 
