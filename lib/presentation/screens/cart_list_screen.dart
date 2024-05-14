@@ -1,12 +1,7 @@
-import 'dart:ui';
-
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/cart_product.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class CartListScreen extends StatefulWidget {
