@@ -35,8 +35,6 @@ class _ProductImageCarouselSliderState
     );
   }
 
-
-
   Widget _buildCarouselSlider() {
     return CarouselSlider(
       options: CarouselOptions(
@@ -75,11 +73,13 @@ class _ProductImageCarouselSliderState
             children: [
               for (int i = 0; i < 5; i++)
                 Container(
-                  height: 15,
-                  width: 15,
-                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  height: 12,
+                  width: 12,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
-                    color: i == currentPage ? AppColors.primaryColor : Colors.white,
+                    color: i == currentPage
+                        ? AppColors.primaryColor
+                        : Colors.white,
                     border: Border.all(
                       color: i == currentPage
                           ? AppColors.primaryColor
