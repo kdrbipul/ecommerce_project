@@ -1,7 +1,9 @@
+import 'package:ecommerce_project/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -13,22 +15,27 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      surfaceTintColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: SizedBox(
-        width: 150,
-        child: Column(
-          children: [
-            _buildProductCardContainer(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _buildProductCardText(),
-            ),
-          ],
+    return GestureDetector(
+      onTap: (){
+        Get.to(() => const ProductDetailsScreen());
+      },
+      child: Card(
+        elevation: 3,
+        surfaceTintColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: SizedBox(
+          width: 150,
+          child: Column(
+            children: [
+              _buildProductCardContainer(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _buildProductCardText(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -101,7 +108,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Visibility _buildAddToWishButton() {
+  Widget _buildAddToWishButton() {
     return Visibility(
       visible: showAddToWishList,
       replacement: _getIconButton(Icons.delete_rounded),
