@@ -7,7 +7,7 @@ class NetworkResponse {
   NetworkResponse({
     required this.responseCode,
     required this.isSuccess,
-    this.errorMessage = '',
+    this.errorMessage = 'Something went wrong, Try again',
     this.responseData,
   });
 }
