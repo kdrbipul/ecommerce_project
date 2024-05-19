@@ -1,3 +1,4 @@
+import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class SizePicker extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SizePickerState extends State<SizePicker> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 30,
+      height: 35,
       child: ListView.builder(
         primary: false,
         shrinkWrap: true,
@@ -33,18 +34,41 @@ class _SizePickerState extends State<SizePicker> {
               widget.onChange(widget.sizes[index]);
               setState(() {});
             },
-            child: CircleAvatar(
-              backgroundColor: widget.sizes[index],
-              child: selectedIndex == index
-                  ? const Icon(
-                Icons.check,
-                color: Colors.white,
-              )
-                  : null,
+            child: Container(
+              height: 35,
+              width: 35,
+              padding: const EdgeInsets.all(8),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: _getSelectedBgColor(index == selectedIndex),
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(
+                  color: _getSelectedTextColor(index == selectedIndex),
+                )
+              ),
+
+              child: FittedBox(
+                child: Text(
+                  widget.sizes[index],
+                  style: TextStyle(
+                      color: _getSelectedTextColor(index == selectedIndex,
+                      ),
+                  ),
+                ),
+              ),
             ),
           );
         },
       ),
     );
+  }
+
+
+  Color _getSelectedTextColor(bool isSelected) {
+    return isSelected ? Colors.white : Colors.black;
+  }
+  Color _getSelectedBgColor(bool isSelected) {
+    return isSelected ? AppColors.primaryColor : Colors.transparent;
   }
 }
