@@ -1,8 +1,8 @@
-import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
+import 'package:ecommerce_project/widgets/color_picker.dart';
 import 'package:ecommerce_project/widgets/product_image_carousel_slider.dart';
+import 'package:ecommerce_project/widgets/wish_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -13,7 +13,6 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-
   int _currentValue = 1;
 
   @override
@@ -21,41 +20,94 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
-        leading: IconButton(
-          onPressed: (){
-            Get.find<MainBottomNavBarController>().backToHome();
-          },
-          icon: const Icon(Icons.arrow_back_ios_new),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const ProductImageCarouselSlider(),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Nike Shoe 2024 Edition 8FE5889',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.8)),
+                        ),
+                      ),
+                      _buildItemItemCount(),
+                    ],
+                  ),
+                  _buildReviewSection(),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Color',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ColorPicker(colors: const [
+                    Colors.black,
+                    Colors.amberAccent,
+                    Colors.green,
+                    Colors.blue,
+                    Colors.redAccent
+                  ], onChange: (Color selectedColor) {}),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Size',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
       ),
-      body:  Column(
-        children: [
-          const ProductImageCarouselSlider(),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                     Expanded(
-                      child: Text(
-                        'Nike Shoe 2024 Edition 8FE5889',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.8)),
-                      ),
-                    ),
-                    _buildItemItemCount()
+    );
+  }
 
-                  ],
-                ),
-
-              ],
+  Widget _buildReviewSection() {
+    return Wrap(
+      spacing: 17,
+      alignment: WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        const Wrap(
+          children: [
+            Icon(
+              Icons.star,
+              color: Colors.amber,
+              size: 20,
             ),
-          )
-        ],
-      ),
+            Text(
+              '3.4',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        TextButton(
+          onPressed: () {},
+          child: const Text('Review'),
+        ),
+        const WishButton()
+      ],
     );
   }
 
@@ -73,3 +125,5 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 }
+
+

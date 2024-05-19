@@ -1,6 +1,7 @@
 import 'package:ecommerce_project/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
+import 'package:ecommerce_project/widgets/wish_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -60,10 +61,10 @@ class ProductCard extends StatelessWidget {
   }
 
   Widget _buildProductCardText() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Nike sports shoe 320k special edition',
           maxLines: 1,
           style: TextStyle(
@@ -77,7 +78,7 @@ class ProductCard extends StatelessWidget {
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            const Text(
+            Text(
               '\$30',
               style: TextStyle(
                 fontSize: 16,
@@ -85,7 +86,7 @@ class ProductCard extends StatelessWidget {
                 color: AppColors.primaryColor,
               ),
             ),
-            const Wrap(
+            Wrap(
               children: [
                 Icon(
                   Icons.star,
@@ -101,35 +102,10 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-            _buildAddToWishButton()
+            WishButton()
           ],
         )
       ],
-    );
-  }
-
-  Widget _buildAddToWishButton() {
-    return Visibility(
-      visible: showAddToWishList,
-      replacement: _getIconButton(Icons.delete_rounded),
-      child: _getIconButton(Icons.favorite_border_outlined),
-    );
-  }
-
-  Widget _getIconButton(IconData icon) {
-    return Card(
-      color: AppColors.primaryColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 16,
-        ),
-      ),
     );
   }
 }
