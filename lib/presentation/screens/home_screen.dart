@@ -2,6 +2,7 @@ import 'package:ecommerce_project/presentation/state_holders/home_slider_control
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce_project/widgets/category_item.dart';
+import 'package:ecommerce_project/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerce_project/widgets/home_carousel_slider.dart';
 import 'package:ecommerce_project/widgets/product_card.dart';
 import 'package:ecommerce_project/widgets/section_header.dart';
@@ -18,14 +19,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchTEController = TextEditingController();
-  final HomeSliderController _homeSliderController =
-      Get.find<HomeSliderController>();
 
-  @override
-  void initState() {
-    super.initState();
-    _homeSliderController.getSlider();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             _buildSearchTextField(),
             const SizedBox(height: 16),
-            const HomeCarouselSlider(),
+            GetBuilder<HomeSliderController>(builder: (sliderController) {
+              if(sliderController.inProgress){
+                return const SizedBox(
+                  height: 220,
+                  child: CenteredCircularProgressIndicator(),
+                );
+              }
+              return HomeCarouselSlider(
+                sliderList: sliderController.sliderList,
+              );
+            }),
             const SizedBox(height: 16),
             SectionHeader(
               title: "All Category",
