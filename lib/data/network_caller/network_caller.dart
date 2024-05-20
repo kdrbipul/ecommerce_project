@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:ecommerce_project/data/models/network_response.dart';
 import 'package:ecommerce_project/presentation/screens/email_verification_screen.dart';
 import 'package:get/get.dart' as get_x;
@@ -6,11 +7,15 @@ import 'package:http/http.dart';
 
 class NetworkCaller {
 
+  /// get request
+
   static Future<NetworkResponse> getRequest({required String url}) async {
     try {
+      log(url);
       final Response response = await get(
-        Uri.parse(url),
-      );
+        Uri.parse(url));
+      log(response.statusCode.toString());
+      log(response.body.toString());
       if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
         return NetworkResponse(
@@ -31,6 +36,7 @@ class NetworkCaller {
         );
       }
     } catch (e) {
+      log(e.toString());
       return NetworkResponse(
         responseCode: -1,
         isSuccess: false,
@@ -39,11 +45,13 @@ class NetworkCaller {
     }
   }
 
+  /// post request
   static Future<NetworkResponse> postRequest({
     required String url,
     Map<String, dynamic>? body,
   }) async {
     try {
+      log(url);
       final Response response = await post(
         Uri.parse(url),
         body: body,
@@ -51,6 +59,8 @@ class NetworkCaller {
           'accept' : 'application/json',
         },
       );
+      log(response.statusCode.toString());
+      log(response.body.toString());
       if (response.statusCode == 200) {
         final decodedData = jsonDecode(response.body);
         return NetworkResponse(
@@ -71,6 +81,7 @@ class NetworkCaller {
         );
       }
     } catch (e) {
+      log(e.toString());
       return NetworkResponse(
         responseCode: -1,
         isSuccess: false,
