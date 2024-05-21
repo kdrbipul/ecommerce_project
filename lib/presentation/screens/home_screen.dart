@@ -1,4 +1,5 @@
 import 'package:ecommerce_project/presentation/state_holders/home_slider_controller.dart';
+import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce_project/widgets/category_item.dart';
@@ -47,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             SectionHeader(
               title: "All Category",
-              onTapSeeAll: () {},
+              onTapSeeAll: () {
+                Get.find<MainBottomNavBarController>().selectCategory();
+              },
             ),
             const SizedBox(height: 16),
             _buildCategoryListView(),
