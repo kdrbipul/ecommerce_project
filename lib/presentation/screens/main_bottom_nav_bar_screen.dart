@@ -2,6 +2,7 @@ import 'package:ecommerce_project/presentation/screens/cart_list_screen.dart';
 import 'package:ecommerce_project/presentation/screens/category_list_screen.dart';
 import 'package:ecommerce_project/presentation/screens/home_screen.dart';
 import 'package:ecommerce_project/presentation/screens/wish_list_screen.dart';
+import 'package:ecommerce_project/presentation/state_holders/category_list_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
@@ -30,6 +31,7 @@ class _MainBottomNavBarScreenState extends State<MainBottomNavBarScreen> {
   void initState() {
     super.initState();
     Get.find<HomeSliderController>().getSlider();
+    Get.find<CategoryListController>().getCategoryList();
   }
 
   @override

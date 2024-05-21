@@ -56,6 +56,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                       child: NetworkImageWidget(
                         url: slider.image ?? '',
                         height: double.maxFinite,
+                        width: double.maxFinite,
                         boxFit: BoxFit.cover,
                         // widget: double.maxFinite,
                       ),

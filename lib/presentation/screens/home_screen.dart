@@ -1,3 +1,5 @@
+import 'package:ecommerce_project/data/models/category.dart';
+import 'package:ecommerce_project/presentation/state_holders/category_list_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
@@ -53,7 +55,17 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const SizedBox(height: 16),
-            _buildCategoryListView(),
+            GetBuilder<CategoryListController>(
+              builder: (categoryListController) {
+                if(categoryListController.inProgress){
+                  return const SizedBox(
+                    height: 120,
+                    child: CenteredCircularProgressIndicator(),
+                  );
+                }
+                return _buildCategoryListView(categoryListController.categoryList);
+              }
+            ),
             SectionHeader(
               title: "Popular Product",
               onTapSeeAll: () {},
@@ -93,14 +105,15 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCategoryListView() {
+  Widget _buildCategoryListView(List<Category> categoryList) {
     return SizedBox(
       height: 120,
       child: ListView.separated(
-        itemCount: 8,
+        itemCount: categoryList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return const CategoryItem();
+          return CategoryItem(category: categoryList[index],
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(width: 26);
