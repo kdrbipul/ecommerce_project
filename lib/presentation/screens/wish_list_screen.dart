@@ -1,10 +1,14 @@
+import 'package:ecommerce_project/data/models/product.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:ecommerce_project/presentation/state_holders/product_list_by_category_controller.dart';
 import 'package:ecommerce_project/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key,});
+
+
 
 
   @override
@@ -36,12 +40,12 @@ class _WishListScreenState extends State<WishListScreen> {
             childAspectRatio: 0.8,
           ),
           itemBuilder: (context, index) {
-            return const Padding(
+            return  Padding(
               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
               child: FittedBox(
-                child: ProductCard(
-                  showAddToWishList: false,
-                ),
+                // child: ProductCard(
+                //   showAddToWishList: false,
+                // ),
               ),
             );
           },
