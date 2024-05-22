@@ -1,6 +1,8 @@
+import 'package:ecommerce_project/data/models/product.dart';
 import 'package:ecommerce_project/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
+import 'package:ecommerce_project/widgets/network_image_widget.dart';
 import 'package:ecommerce_project/widgets/wish_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,9 +12,11 @@ class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     this.showAddToWishList = true,
+    required this.product,
   });
 
   final bool showAddToWishList;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -55,54 +59,54 @@ class ProductCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset(AssetsPath.productShoeSvg),
+        child: Image.network(product.image ?? ''),
       ),
     );
   }
 
   Widget _buildProductCardText() {
-    return const Column(
+    return  Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Nike sports shoe 320k special edition',
+          product.title ?? '',
           maxLines: 1,
-          style: TextStyle(
+          style: const TextStyle(
               overflow: TextOverflow.ellipsis,
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: Colors.grey),
         ),
-        Wrap(
-          spacing: 17,
+         Wrap(
+          spacing: 4,
           alignment: WrapAlignment.start,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Text(
-              '\$30',
-              style: TextStyle(
+              '\$${product.price}',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 color: AppColors.primaryColor,
               ),
             ),
-            Wrap(
+             Wrap(
               children: [
-                Icon(
+                const Icon(
                   Icons.star,
                   color: Colors.amber,
                   size: 20,
                 ),
                 Text(
-                  '3.4',
-                  style: TextStyle(
+                  '${product.star}',
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ],
             ),
-            WishButton()
+            const WishButton()
           ],
         )
       ],

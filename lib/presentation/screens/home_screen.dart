@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: 8,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return const ProductCard();
+          // return const ProductCard();
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(width: 8);
