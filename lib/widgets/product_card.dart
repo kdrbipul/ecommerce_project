@@ -1,11 +1,8 @@
 import 'package:ecommerce_project/data/models/product.dart';
 import 'package:ecommerce_project/presentation/screens/product_details_screen.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
-import 'package:ecommerce_project/presentation/utils/assets_path.dart';
-import 'package:ecommerce_project/widgets/network_image_widget.dart';
 import 'package:ecommerce_project/widgets/wish_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {

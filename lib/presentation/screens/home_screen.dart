@@ -1,17 +1,20 @@
 import 'package:ecommerce_project/data/models/category.dart';
+import 'package:ecommerce_project/data/models/product.dart';
 import 'package:ecommerce_project/presentation/state_holders/category_list_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
+import 'package:ecommerce_project/presentation/state_holders/popular_product_list_controller.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:ecommerce_project/widgets/app_bar_icon_button.dart';
 import 'package:ecommerce_project/widgets/category_item.dart';
 import 'package:ecommerce_project/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerce_project/widgets/home_carousel_slider.dart';
-import 'package:ecommerce_project/widgets/product_card.dart';
 import 'package:ecommerce_project/widgets/section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,8 +25,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchTEController = TextEditingController();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildSearchTextField(),
             const SizedBox(height: 16),
             GetBuilder<HomeSliderController>(builder: (sliderController) {
-              if(sliderController.inProgress){
+              if (sliderController.inProgress) {
                 return const SizedBox(
                   height: 220,
                   child: CenteredCircularProgressIndicator(),
@@ -56,47 +57,56 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 16),
             GetBuilder<CategoryListController>(
-              builder: (categoryListController) {
-                if(categoryListController.inProgress){
-                  return const SizedBox(
-                    height: 120,
-                    child: CenteredCircularProgressIndicator(),
-                  );
-                }
-                return _buildCategoryListView(categoryListController.categoryList);
+                builder: (categoryListController) {
+              if (categoryListController.inProgress) {
+                return const SizedBox(
+                  height: 120,
+                  child: CenteredCircularProgressIndicator(),
+                );
               }
-            ),
+              return _buildCategoryListView(
+                  categoryListController.categoryList);
+            }),
             SectionHeader(
               title: "Popular Product",
               onTapSeeAll: () {},
             ),
-            _buildProductListView(),
+            GetBuilder<PopularProductListController>(
+                builder: (popularProductListController) {
+              if (popularProductListController.popularProductInProgress) {
+                return const SizedBox(
+                  height: 225,
+                  child: CenteredCircularProgressIndicator(),
+                );
+              }
+              return _buildProductListView(popularProductListController.productList);
+            }),
             const SizedBox(height: 8),
             SectionHeader(
               title: "Special",
               onTapSeeAll: () {},
             ),
-            _buildProductListView(),
+            // _buildProductListView(),
             const SizedBox(height: 8),
             SectionHeader(
               title: "New",
               onTapSeeAll: () {},
             ),
-            _buildProductListView(),
+            // _buildProductListView(),
           ],
         ),
       )),
     );
   }
 
-  Widget _buildProductListView() {
+  Widget _buildProductListView(List<Product> productList) {
     return SizedBox(
       height: 225,
       child: ListView.separated(
-        itemCount: 8,
+        itemCount: productList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          // return const ProductCard();
+          return  ProductCard(product: productList[index],);
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(width: 8);
@@ -112,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: categoryList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return CategoryItem(category: categoryList[index],
+          return CategoryItem(
+            category: categoryList[index],
           );
         },
         separatorBuilder: (BuildContext context, int index) {
@@ -175,4 +186,3 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 }
-
