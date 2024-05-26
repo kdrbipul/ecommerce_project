@@ -10,10 +10,15 @@ class ControllerBinder extends Bindings{
   @override
   void dependencies() {
     Get.put(MainBottomNavBarController());
+
     Get.put(HomeSliderController());
+
     Get.put(CategoryListController());
+
     Get.put(ProductListByCategoryController());
+
     Get.put(PopularProductListController());
+
   }
 
 }
