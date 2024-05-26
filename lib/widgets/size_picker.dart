@@ -6,10 +6,12 @@ class SizePicker extends StatefulWidget {
     super.key,
     required this.onChange,
     required this.sizes,
+    this.isRounded = true,
   });
 
   final List<String> sizes;
   final Function(String) onChange;
+  final bool isRounded;
 
   @override
   State<SizePicker> createState() => _SizePickerState();
@@ -36,13 +38,13 @@ class _SizePickerState extends State<SizePicker> {
             },
             child: Container(
               height: 35,
-              width: 35,
+              width: widget.isRounded ? 35 : null,
               padding: const EdgeInsets.all(8),
               alignment: Alignment.center,
               margin: const EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
                 color: _getSelectedBgColor(index == selectedIndex),
-                borderRadius: BorderRadius.circular(100),
+                borderRadius: BorderRadius.circular(widget.isRounded ? 100 : 8),
                 border: Border.all(
                   color: _getSelectedTextColor(index == selectedIndex),
                 )
