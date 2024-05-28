@@ -24,7 +24,7 @@ class NetworkCaller {
           isSuccess: true,
         );
       } else if (response.statusCode == 401) {
-        _goToSignScreen;
+        _goToSignScreen();
         return NetworkResponse(
           responseCode: response.statusCode,
           isSuccess: false,
@@ -69,7 +69,7 @@ class NetworkCaller {
           isSuccess: true,
         );
       } else if (response.statusCode == 401) {
-        _goToSignScreen;
+        _goToSignScreen();
         return NetworkResponse(
           responseCode: response.statusCode,
           isSuccess: false,
