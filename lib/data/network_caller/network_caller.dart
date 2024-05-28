@@ -54,7 +54,7 @@ class NetworkCaller {
       log(url);
       final Response response = await post(
         Uri.parse(url),
-        body: body,
+        body: jsonEncode(body),
         headers: {
           'accept' : 'application/json',
         },

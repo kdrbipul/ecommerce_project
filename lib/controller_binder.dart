@@ -1,3 +1,4 @@
+import 'package:ecommerce_project/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/category_list_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/home_slider_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/main_bottom_nav_bar_controller.dart';
@@ -20,6 +21,7 @@ class ControllerBinder extends Bindings{
     Get.put(NewProductListController());
     Get.put(SpecialProductListController());
     Get.put(ProductDetailsController());
+    Get.put(AddToCartController());
   }
 
 }
