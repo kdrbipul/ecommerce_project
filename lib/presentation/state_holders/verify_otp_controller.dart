@@ -3,7 +3,7 @@ import 'package:ecommerce_project/data/network_caller/network_caller.dart';
 import 'package:ecommerce_project/data/utility/urls.dart';
 import 'package:get/get.dart';
 
-class EmailVerificationController extends GetxController {
+class OtpVerificationController extends GetxController {
   bool _inProgress = false;
   String _errorMessage = '';
 
@@ -11,12 +11,12 @@ class EmailVerificationController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Future<bool> verifyEmail(String email) async {
+  Future<bool> verifyOtp(String email, String otp) async {
     bool _isSuccess = false;
     _inProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      url: Urls.verifyEmail(email),
+      url: Urls.verifyOtp(email, otp),
     );
     if (response.isSuccess) {
       _isSuccess = true;

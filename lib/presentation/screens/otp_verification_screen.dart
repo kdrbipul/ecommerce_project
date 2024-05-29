@@ -1,6 +1,8 @@
 import 'package:ecommerce_project/presentation/screens/complete_profile_screen.dart';
+import 'package:ecommerce_project/presentation/state_holders/verify_otp_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
+import 'package:ecommerce_project/widgets/centered_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -19,6 +21,7 @@ class OtpVerificationScreen extends StatefulWidget {
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpTEController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _count = 10.obs;
 
   @override
@@ -61,23 +64,54 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 const SizedBox(height: 18),
                 _buildPinField(),
                 const SizedBox(height: 18),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.to(
-                      () => const CompleteProfileScreen(),
-                    );
-                  },
-                  child: const Text('Next'),
-                ),
+                GetBuilder<OtpVerificationController>(
+                    builder: (otpVerificationController) {
+                  if (otpVerificationController.inProgress) {
+                    return const CenteredCircularProgressIndicator();
+                  }
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final result = await otpVerificationController.verifyOtp(
+                        widget.email,
+                        _otpTEController.text,
+                      );
+                      if (result) {
+                        Get.to(
+                          () => const CompleteProfileScreen(),
+                        );
+                      } else {
+                        Get.snackbar(
+                          '',
+                          otpVerificationController.errorMessage,
+                          snackPosition: SnackPosition.TOP,
+                          showProgressIndicator: true,
+                          backgroundColor: Colors.orange,
+                          colorText: Colors.white,
+                          borderRadius: 5,
+                          margin: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
+                          icon: const Icon(
+                            Icons.ac_unit,
+                            color: Colors.white,
+                          ),
+                          isDismissible: false,
+                          duration: const Duration(seconds: 3),
+                          animationDuration: const Duration(milliseconds: 600),
+                        );
+                      }
+                    },
+                    child: const Text('Next'),
+                  );
+                }),
                 const SizedBox(height: 34),
                 buildResendCodeMessage(),
-                Obx(() =>
-                  Visibility(
+                Obx(
+                  () => Visibility(
                     visible: _count.value == 0,
                     replacement: const SizedBox(),
                     child: TextButton(
                       onPressed: () {
-                        _count.value=10;
+                        _count.value = 10;
                         timeDecrement();
                       },
                       child: const Text('Resend Code'),
@@ -93,52 +127,57 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   Widget buildResendCodeMessage() {
-    return
-      Obx(() =>
-        RichText(
-          text:  TextSpan(
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-            children: [
-              const TextSpan(
-                text: ('This code will be expire in '),
-              ),
-              TextSpan(
-                text: ("${_count.value}s"),
-                style: const TextStyle(color: AppColors.primaryColor),
-              ),
-            ],
+    return Obx(
+      () => RichText(
+        text: TextSpan(
+          style: const TextStyle(
+            color: Colors.grey,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
           ),
+          children: [
+            const TextSpan(
+              text: ('This code will be expire in '),
+            ),
+            TextSpan(
+              text: ("${_count.value}s"),
+              style: const TextStyle(color: AppColors.primaryColor),
+            ),
+          ],
         ),
-      );
-
+      ),
+    );
   }
 
   Widget _buildPinField() {
-    return PinCodeTextField(
-      controller: _otpTEController,
-      keyboardType: TextInputType.number,
-      length: 6,
-      obscureText: false,
-      animationType: AnimationType.fade,
-      pinTheme: PinTheme(
-        shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(5),
-        fieldHeight: 50,
-        fieldWidth: 40,
-        activeFillColor: Colors.white,
-        inactiveFillColor: Colors.transparent,
-        selectedFillColor: Colors.transparent,
+    return Form(
+      key: _formKey,
+      child: PinCodeTextField(
+        validator: (String? value) {
+          if (value?.isEmpty ?? true) {
+            return "Enter Your Email";
+          } else {
+            return null;
+          }
+        },
+        controller: _otpTEController,
+        keyboardType: TextInputType.number,
+        length: 6,
+        obscureText: false,
+        animationType: AnimationType.fade,
+        pinTheme: PinTheme(
+          shape: PinCodeFieldShape.box,
+          borderRadius: BorderRadius.circular(5),
+          fieldHeight: 50,
+          fieldWidth: 40,
+          activeFillColor: Colors.white,
+          inactiveFillColor: Colors.transparent,
+          selectedFillColor: Colors.transparent,
+        ),
+        animationDuration: const Duration(milliseconds: 300),
+        enableActiveFill: true,
+        appContext: context,
       ),
-      animationDuration: const Duration(milliseconds: 300),
-      // backgroundColor: Colors.blue.shade50,
-      enableActiveFill: true,
-      // errorAnimationController: errorController,
-      // controller: textEditingController,
-      appContext: context,
     );
   }
 
