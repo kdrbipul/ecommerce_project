@@ -2,18 +2,27 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:ecommerce_project/data/models/network_response.dart';
 import 'package:ecommerce_project/presentation/screens/email_verification_screen.dart';
+import 'package:ecommerce_project/presentation/state_holders/user_auth_controller.dart';
 import 'package:get/get.dart' as get_x;
 import 'package:http/http.dart';
 
 class NetworkCaller {
-
   /// get request
 
-  static Future<NetworkResponse> getRequest({required String url}) async {
+  static Future<NetworkResponse> getRequest({
+    required String url,
+    bool formAuth = false,
+  }) async {
     try {
       log(url);
+      log(UserAuthController.accessToken);
       final Response response = await get(
-        Uri.parse(url));
+        Uri.parse(url),
+        headers: {
+          'accept': 'application/json',
+          'token': UserAuthController.accessToken,
+        },
+      );
       log(response.statusCode.toString());
       log(response.body.toString());
       if (response.statusCode == 200) {
@@ -24,7 +33,9 @@ class NetworkCaller {
           isSuccess: true,
         );
       } else if (response.statusCode == 401) {
-        _goToSignScreen();
+        if (!formAuth) {
+          _goToSignScreen();
+        }
         return NetworkResponse(
           responseCode: response.statusCode,
           isSuccess: false,
@@ -52,11 +63,13 @@ class NetworkCaller {
   }) async {
     try {
       log(url);
+      log(UserAuthController.accessToken);
       final Response response = await post(
         Uri.parse(url),
         body: jsonEncode(body),
         headers: {
-          'accept' : 'application/json',
+          'accept': 'application/json',
+          'token': UserAuthController.accessToken,
         },
       );
       log(response.statusCode.toString());
@@ -90,7 +103,6 @@ class NetworkCaller {
     }
   }
 
-
   static void _goToSignScreen() {
     /*Navigator.push(
       CraftyBay.navigatorKey.currentState!.context,
@@ -98,6 +110,8 @@ class NetworkCaller {
         builder: (context) => const EmailVerificationScreen(),
       ),
     );*/
-    get_x.Get.to(() =>  const EmailVerificationScreen(),);
+    get_x.Get.to(
+      () => const EmailVerificationScreen(),
+    );
   }
 }

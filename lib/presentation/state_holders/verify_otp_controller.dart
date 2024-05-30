@@ -1,6 +1,7 @@
 import 'package:ecommerce_project/data/models/network_response.dart';
 import 'package:ecommerce_project/data/network_caller/network_caller.dart';
 import 'package:ecommerce_project/data/utility/urls.dart';
+import 'package:ecommerce_project/presentation/state_holders/user_auth_controller.dart';
 import 'package:get/get.dart';
 
 class OtpVerificationController extends GetxController {
@@ -19,6 +20,7 @@ class OtpVerificationController extends GetxController {
       url: Urls.verifyOtp(email, otp),
     );
     if (response.isSuccess) {
+      UserAuthController.saveUserToken(response.responseData['data']);
       _isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
