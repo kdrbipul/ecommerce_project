@@ -1,5 +1,7 @@
+import 'package:ecommerce_project/presentation/screens/home_screen.dart';
 import 'package:ecommerce_project/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -43,7 +45,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 buildCompleteProfileForm(),
                 const SizedBox(height: 38),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if(_formKey.currentState!.validate()){
+                      Get.off(() => const HomeScreen());
+                    }
+                  },
                   child: const Text('Next'),
                 ),
               ],
@@ -63,28 +69,60 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             controller: _firstNameTEController,
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(
-                hintText: 'First Name', labelText: 'First Name'),
+              hintText: 'First Name',
+              labelText: 'First Name',
+            ),
+            validator: (String? value){
+              if(value?.isEmpty ?? true){
+                return 'Enter your first name';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 10),
           TextFormField(
             controller: _lastNameTEController,
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(
-                hintText: 'Last Name', labelText: 'Last Name'),
+              hintText: 'Last Name',
+              labelText: 'Last Name',
+            ),
+            validator: (String? value){
+              if(value?.isEmpty ?? true){
+                return 'Enter your last name';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 10),
           TextFormField(
             controller: _mobileTEController,
             keyboardType: TextInputType.phone,
-            decoration:
-                const InputDecoration(hintText: 'Mobile', labelText: 'Mobile'),
+            decoration: const InputDecoration(
+              hintText: 'Mobile',
+              labelText: 'Mobile',
+            ),
+            validator: (String? value){
+              if(value?.isEmpty ?? true){
+                return 'Enter mobile number';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 10),
           TextFormField(
             controller: _cityTEController,
             keyboardType: TextInputType.text,
-            decoration:
-                const InputDecoration(hintText: 'City', labelText: 'City'),
+            decoration: const InputDecoration(
+              hintText: 'City',
+              labelText: 'City',
+            ),
+            validator: (String? value){
+              if(value?.isEmpty ?? true){
+                return 'Enter your city';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 10),
           TextFormField(
@@ -92,7 +130,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             keyboardType: TextInputType.text,
             maxLines: 3,
             decoration: const InputDecoration(
-                hintText: 'Shipping Address', labelText: 'Shipping Address'),
+              hintText: 'Shipping Address',
+              labelText: 'Shipping Address',
+            ),
+            validator: (String? value){
+              if(value?.isEmpty ?? true){
+                return 'Enter your address';
+              }
+              return null;
+            },
           ),
         ],
       ),
@@ -101,11 +147,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
   @override
   void dispose() {
-    _firstNameTEController.clear();
-    _lastNameTEController.clear();
-    _mobileTEController.clear();
-    _cityTEController.clear();
-    _shippingAddressTEController.clear();
+    _firstNameTEController.dispose();
+    _lastNameTEController.dispose();
+    _mobileTEController.dispose();
+    _cityTEController.dispose();
+    _shippingAddressTEController.dispose();
     super.dispose();
   }
 }

@@ -22,7 +22,7 @@ class OtpVerificationScreen extends StatefulWidget {
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final _count = 10.obs;
+  final _count = 60.obs;
 
   @override
   void initState() {
@@ -76,7 +76,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         _otpTEController.text,
                       );
                       if (result) {
-                        Get.to(
+                        Get.off(
                           () => const CompleteProfileScreen(),
                         );
                       } else {
@@ -85,7 +85,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           otpVerificationController.errorMessage,
                           snackPosition: SnackPosition.TOP,
                           showProgressIndicator: true,
-                          backgroundColor: Colors.orange,
+                          backgroundColor: AppColors.primaryColor,
                           colorText: Colors.white,
                           borderRadius: 5,
                           margin: const EdgeInsets.all(10),
@@ -183,7 +183,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   void dispose() {
-    _otpTEController.clear();
+    _otpTEController.dispose();
     super.dispose();
   }
 }
