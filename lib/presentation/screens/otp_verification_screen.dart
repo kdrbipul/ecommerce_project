@@ -76,7 +76,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         _otpTEController.text,
                       );
                       if (result) {
-                        Get.to(
+                        Get.off(
                           () => const CompleteProfileScreen(),
                         );
                       } else {

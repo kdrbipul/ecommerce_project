@@ -1,6 +1,7 @@
 import 'package:ecommerce_project/data/models/cart_model.dart';
 import 'package:ecommerce_project/data/models/product_details_model.dart';
 import 'package:ecommerce_project/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:ecommerce_project/presentation/state_holders/add_to_wish_list_controller.dart';
 import 'package:ecommerce_project/presentation/state_holders/product_details_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/widgets/centered_circular_progress_indicator.dart';
@@ -42,70 +43,70 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         title: const Text('Product Details'),
       ),
       body: GetBuilder<ProductDetailsController>(
-          builder: (productDetailsController) {
-        if (productDetailsController.inProgress) {
-          return const CenteredCircularProgressIndicator();
-        }
+        builder: (productDetailsController) {
+          if (productDetailsController.inProgress) {
+            return const CenteredCircularProgressIndicator();
+          }
 
-        if (productDetailsController.errorMessage.isNotEmpty) {
-          return Center(
-            child: Text(productDetailsController.errorMessage),
-          );
-        }
+          if (productDetailsController.errorMessage.isNotEmpty) {
+            return Center(
+              child: Text(productDetailsController.errorMessage),
+            );
+          }
 
-        ProductDetailsModel productDetailsModel =
-            productDetailsController.productDetailsModel;
+          ProductDetailsModel productDetailsModel =
+              productDetailsController.productDetailsModel;
 
-        List<String> colors = productDetailsModel.color?.split(',') ?? [];
-        List<String> sizes = productDetailsModel.size?.split(',') ?? [];
-        _selectedSizes = sizes.first;
-        _selectedColor = colors.first;
+          List<String> colors = productDetailsModel.color?.split(',') ?? [];
+          List<String> sizes = productDetailsModel.size?.split(',') ?? [];
+          _selectedSizes = sizes.first;
+          _selectedColor = colors.first;
 
-        return Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ProductImageCarouselSlider(
-                      images: [
-                        productDetailsModel.img1 ?? '',
-                        productDetailsModel.img2 ?? '',
-                        productDetailsModel.img3 ?? '',
-                        productDetailsModel.img4 ?? '',
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  productDetailsModel.product?.title ?? '',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.black.withOpacity(0.8)),
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ProductImageCarouselSlider(
+                        images: [
+                          productDetailsModel.img1 ?? '',
+                          productDetailsModel.img2 ?? '',
+                          productDetailsModel.img3 ?? '',
+                          productDetailsModel.img4 ?? '',
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    productDetailsModel.product?.title ?? '',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black.withOpacity(0.8)),
+                                  ),
                                 ),
-                              ),
-                              _buildItemItemCount(),
-                            ],
-                          ),
-                          _buildReviewSection(productDetailsModel),
-                          const SizedBox(height: 8),
-                          const Text(
-                            'Color',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
+                                _buildItemItemCount(),
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                         /* ColorPicker(colors: const [
+                            _buildReviewSection(productDetailsModel),
+                            const SizedBox(height: 8),
+                            const Text(
+                              'Color',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            /* ColorPicker(colors: const [
                             Colors.black,
                             Colors.amberAccent,
                             Colors.green,
@@ -113,57 +114,57 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             Colors.redAccent
                           ], onChange: (Color selectedColor) {},
                           ),*/
-                          SizePicker(
-                            onChange: (String s) {
-                              _selectedColor = s;
-                            },
-                            sizes: colors,
-                            isRounded: false,
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'Size',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
+                            SizePicker(
+                              onChange: (String s) {
+                                _selectedColor = s;
+                              },
+                              sizes: colors,
+                              isRounded: false,
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          SizePicker(
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Size',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            SizePicker(
                               onChange: (String s) {
                                 _selectedSizes = s;
                               },
                               sizes: sizes,
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'Description',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            productDetailsModel.product?.shortDes ?? '',
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            productDetailsModel.des ?? '',
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Description',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              productDetailsModel.product?.shortDes ?? '',
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              productDetailsModel.des ?? '',
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            _buildAddToCartWidget(productDetailsModel),
-          ],
-        );
-      },
+              _buildAddToCartWidget(productDetailsModel),
+            ],
+          );
+        },
       ),
     );
   }
@@ -183,11 +184,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           _buildPriceWidget(productDetailsModel),
           SizedBox(
             width: 160,
-            child: GetBuilder<AddToCartController>(
-              builder: (addToCartController) {
-                if(addToCartController.inProgress){
-                  return const CenteredCircularProgressIndicator();
-                }
+            child:
+                GetBuilder<AddToCartController>(builder: (addToCartController) {
+              if (addToCartController.inProgress) {
+                return const CenteredCircularProgressIndicator();
+              }
               return ElevatedButton(
                 onPressed: () {
                   CartModel cartModel = CartModel(
@@ -200,8 +201,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 },
                 child: const Text('Add To Cart'),
               );
-            }
-            ),
+            }),
           ),
         ],
       ),
@@ -209,7 +209,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   Widget _buildPriceWidget(ProductDetailsModel productDetailsModel) {
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -220,7 +220,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             color: Colors.grey,
           ),
         ),
-         Text(
+        Text(
           '\$${productDetailsModel.product?.price ?? 0}',
           style: const TextStyle(
             fontSize: 24,
@@ -238,7 +238,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       alignment: WrapAlignment.start,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-         Wrap(
+        Wrap(
           children: [
             const Icon(
               Icons.star,
@@ -258,7 +258,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           onPressed: () {},
           child: const Text('Review'),
         ),
-        const WishButton()
+        GetBuilder<AddToWishListController>(
+          builder: (addToWishListController) {
+            if (addToWishListController.inProgress) {
+              return Transform.scale(
+                scale: 0.4,
+                child: const CircularProgressIndicator(),
+              );
+            }
+            return WishButton(
+              showAddToWishList: true,
+              onTap: () {
+                addToWishListController.getAddToWishList(
+                  widget.productId,
+                );
+              },
+            );
+          },
+        )
       ],
     );
   }

@@ -1,22 +1,29 @@
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
-class WishButton extends StatefulWidget {
-  const WishButton({super.key,  this.showAddToWishList = true});
+class WishButton extends StatelessWidget {
+  const WishButton({
+    super.key,
+    this.showAddToWishList = true,
+    this.isSelected = false,
+    required this.onTap,
+  });
 
   final bool showAddToWishList;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  @override
-  State<WishButton> createState() => _WishButtonState();
-}
-
-class _WishButtonState extends State<WishButton> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
       visible: true,
       replacement: _getIconButton(Icons.delete_rounded),
-      child: _getIconButton(Icons.favorite_border_outlined),
+      child: InkWell(
+        onTap: onTap,
+        child: _getIconButton(
+          _getIconData(),
+        ),
+      ),
     );
   }
 
@@ -35,5 +42,9 @@ class _WishButtonState extends State<WishButton> {
         ),
       ),
     );
+  }
+
+  IconData _getIconData() {
+    return isSelected ? Icons.favorite : Icons.favorite_outline_rounded;
   }
 }

@@ -103,13 +103,14 @@ class NetworkCaller {
     }
   }
 
-  static void _goToSignScreen() {
+  static Future<void> _goToSignScreen() async {
     /*Navigator.push(
       CraftyBay.navigatorKey.currentState!.context,
       MaterialPageRoute(
         builder: (context) => const EmailVerificationScreen(),
       ),
     );*/
+    await UserAuthController.clearUserData();
     get_x.Get.to(
       () => const EmailVerificationScreen(),
     );

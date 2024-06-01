@@ -105,7 +105,7 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-            const WishButton()
+             WishButton(onTap: () {},)
           ],
         )
       ],
