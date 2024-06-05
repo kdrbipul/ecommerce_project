@@ -1,6 +1,8 @@
 import 'package:ecommerce_project/data/models/product.dart';
 import 'package:ecommerce_project/presentation/screens/product_details_screen.dart';
+import 'package:ecommerce_project/presentation/state_holders/add_to_wish_list_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
+import 'package:ecommerce_project/widgets/centered_circular_progress_indicator.dart';
 import 'package:ecommerce_project/widgets/wish_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -105,7 +107,17 @@ class ProductCard extends StatelessWidget {
                 ),
               ],
             ),
-             WishButton(onTap: () {},)
+
+
+             GetBuilder<AddToWishListController>(
+               builder: (addToWishListController) {
+                 if(addToWishListController.inProgress){
+                   return const CenteredCircularProgressIndicator();
+                 }
+                 return WishButton(onTap: () {},
+                 );
+               }
+             )
           ],
         )
       ],

@@ -2,17 +2,18 @@ import 'package:ecommerce_project/presentation/screens/email_verification_screen
 import 'package:ecommerce_project/presentation/state_holders/user_auth_controller.dart';
 import 'package:get/get.dart';
 
-class MainBottomNavBarController extends GetxController{
-
+class MainBottomNavBarController extends GetxController {
   int _selectedIndex = 0;
 
   int get selectedIndex => _selectedIndex;
 
   Future<void> changeIndex(int index) async {
-    if(index == 2 || index == 3) {
+    if (index == 2 || index == 3) {
       final isLoggedIn = await UserAuthController.checkLoggedInState();
-      if(!isLoggedIn){
-        Get.to(() => const EmailVerificationScreen(),);
+      if (!isLoggedIn) {
+        Get.to(
+          () => const EmailVerificationScreen(),
+        );
       }
       return;
     }
@@ -27,5 +28,4 @@ class MainBottomNavBarController extends GetxController{
   void selectCategory() {
     changeIndex(1);
   }
-
 }
