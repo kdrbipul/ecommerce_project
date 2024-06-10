@@ -14,8 +14,8 @@ class MainBottomNavBarController extends GetxController {
         Get.to(
           () => const EmailVerificationScreen(),
         );
+        return;
       }
-      return;
     }
     _selectedIndex = index;
     update();

@@ -12,7 +12,8 @@ class CartProduct extends StatefulWidget {
 }
 
 class _CartProductState extends State<CartProduct> {
-  int _currentValue = 1;
+ late int _currentValue;
+
 
   @override
   Widget build(BuildContext context) {

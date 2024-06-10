@@ -268,6 +268,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             }
             return WishButton(
               showAddToWishList: true,
+              isSelected: true,
               onTap: () {
                 addToWishListController.getAddToWishList(
                   widget.productId,

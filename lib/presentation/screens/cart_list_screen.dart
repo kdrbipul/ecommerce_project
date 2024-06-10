@@ -12,25 +12,24 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
-
   @override
   Widget build(BuildContext context) {
-    return  PopScope(
+    return PopScope(
       canPop: false,
-      onPopInvoked: (_){
+      onPopInvoked: (_) {
         Get.find<MainBottomNavBarController>().backToHome();
       },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Carts'),
           leading: IconButton(
-            onPressed: (){
+            onPressed: () {
               Get.find<MainBottomNavBarController>().backToHome();
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body:    Column(
+        body: Column(
           children: [
             Expanded(
               child: ListView.builder(
@@ -61,9 +60,12 @@ class _CartListScreenState extends State<CartListScreen> {
         children: [
           _buildTotalPriceWidget(),
           SizedBox(
-              width: 100,
-              child: ElevatedButton(
-                  onPressed: () {}, child: const Text('Checkout')))
+            width: 100,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('Checkout'),
+            ),
+          ),
         ],
       ),
     );
