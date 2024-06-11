@@ -1,3 +1,4 @@
+import 'package:ecommerce_project/data/models/cart_list_item.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 class CartProduct extends StatefulWidget {
-  const CartProduct({super.key});
+  const CartProduct({super.key, required this.cartListItem,});
+
+  final CartListItem cartListItem;
 
   @override
   State<CartProduct> createState() => _CartProductState();
@@ -67,9 +70,9 @@ class _CartProductState extends State<CartProduct> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            '\$400',
-            style: TextStyle(
+           Text(
+            '\$${widget.cartListItem.product?.price ?? 0}',
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: AppColors.primaryColor,
@@ -91,17 +94,17 @@ class _CartProductState extends State<CartProduct> {
   }
 
   Widget _buildProductCategory() {
-    return const Wrap(
+    return  Wrap(
       spacing: 16,
       children: [
         Text(
-          'Color: Red',
-          style: TextStyle(
+          'Color: ${widget.cartListItem.color}',
+          style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
         ),
         Text(
-          'Size: xl',
-          style: TextStyle(
+          'Size: ${widget.cartListItem.size}',
+          style: const TextStyle(
               fontSize: 16, fontWeight: FontWeight.w400, color: Colors.grey),
         ),
       ],
@@ -109,10 +112,10 @@ class _CartProductState extends State<CartProduct> {
   }
 
   Widget _buildProductName() {
-    return const Text(
-      'Nike Shoe 234555',
+    return  Text(
+      widget.cartListItem.product?.title ?? '',
       maxLines: 1,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
           color: Colors.black87,

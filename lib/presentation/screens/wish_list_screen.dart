@@ -42,23 +42,28 @@ class _WishListScreenState extends State<WishListScreen> {
           if (wishListController.inProgress) {
             return const CenteredCircularProgressIndicator();
           }
-          return GridView.builder(
-            itemCount: wishListController.wishList.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.8,
-            ),
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                child: FittedBox(
-                  child: ProductCard(
-                    showAddToWishList: false,
-                    product: wishListController.wishList[index].product!,
-                  ),
-                ),
-              );
+          return RefreshIndicator(
+            onRefresh: () async {
+              await wishListController.getWishList();
             },
+            child: GridView.builder(
+              itemCount: wishListController.wishList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  child: FittedBox(
+                    child: ProductCard(
+                      showAddToWishList: false,
+                      product: wishListController.wishList[index].product!,
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         }),
       ),
