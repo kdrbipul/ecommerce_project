@@ -12,7 +12,7 @@ class CartProduct extends StatefulWidget {
 }
 
 class _CartProductState extends State<CartProduct> {
- late int _currentValue;
+  int _currentValue = 1;
 
 
   @override

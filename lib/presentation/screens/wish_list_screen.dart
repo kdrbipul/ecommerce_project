@@ -43,7 +43,7 @@ class _WishListScreenState extends State<WishListScreen> {
             return const CenteredCircularProgressIndicator();
           }
           return GridView.builder(
-            itemCount: wishListController.productList.length,
+            itemCount: wishListController.wishList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.8,
@@ -54,7 +54,7 @@ class _WishListScreenState extends State<WishListScreen> {
                 child: FittedBox(
                   child: ProductCard(
                     showAddToWishList: false,
-                    product: wishListController.productList[index],
+                    product: wishListController.wishList[index].product!,
                   ),
                 ),
               );
