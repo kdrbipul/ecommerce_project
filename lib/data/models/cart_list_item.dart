@@ -6,7 +6,7 @@ class CartListItem {
   int? productId;
   String? color;
   String? size;
-  String? qty;
+  int? qty;
   String? price;
   String? createdAt;
   String? updatedAt;
@@ -30,7 +30,7 @@ class CartListItem {
     productId = json['product_id'];
     color = json['color'];
     size = json['size'];
-    qty = json['qty'];
+    qty = int.tryParse(json['qty']) ?? 1;
     price = json['price'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];

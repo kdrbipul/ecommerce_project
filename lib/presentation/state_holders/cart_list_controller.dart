@@ -38,9 +38,18 @@ class CartListController extends GetxController {
   double get totalPrice {
     double total = 0;
     for(CartListItem cartList in _cartList){
-      total += (double.tryParse(cartList.qty ?? '1') ?? 1) *
+      total += (cartList.qty!)  *
           (double.tryParse(cartList.product?.price ?? '0') ?? 0);
     }
     return total;
   }
+
+  void changeProductQuantity(int cartId, int quantity) {
+    _cartList.firstWhere((c) => c.id == cartId).qty = quantity;
+    update();
+}
+
+void deleteCartItem (int cartId) {
+
+}
 }
