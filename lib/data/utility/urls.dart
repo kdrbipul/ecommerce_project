@@ -24,4 +24,7 @@ class Urls {
       '$_baseUrl/CreateWishList/$productId';
 
   static const String getWishList = '$_baseUrl/ProductWishList';
+
+  static String deleteProduct(int cartId) =>
+      '$_baseUrl/DeleteCartList/$cartId';
 }

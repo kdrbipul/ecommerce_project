@@ -24,8 +24,7 @@ class CartListController extends GetxController {
       url: Urls.getWishList,
     );
     if (response.isSuccess) {
-      _cartList =
-          CartListModel.fromJson(response.responseData).cartList ?? [];
+      _cartList = CartListModel.fromJson(response.responseData).cartList ?? [];
       _isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
@@ -37,8 +36,8 @@ class CartListController extends GetxController {
 
   double get totalPrice {
     double total = 0;
-    for(CartListItem cartList in _cartList){
-      total += (cartList.qty!)  *
+    for (CartListItem cartList in _cartList) {
+      total += (cartList.qty!) *
           (double.tryParse(cartList.product?.price ?? '0') ?? 0);
     }
     return total;
@@ -47,9 +46,27 @@ class CartListController extends GetxController {
   void changeProductQuantity(int cartId, int quantity) {
     _cartList.firstWhere((c) => c.id == cartId).qty = quantity;
     update();
-}
+  }
 
-void deleteCartItem (int cartId) {
+  void _deleteCartItem(int cartId) {
+    _cartList.removeWhere((c) => c.id == cartId);
+  }
 
-}
+  Future<bool> deleteCartItem(int cartId) async {
+    bool isSuccess = false;
+    _inProgress = true;
+    update();
+
+    final NetworkResponse response =
+        await NetworkCaller.getRequest(url: Urls.deleteProduct(cartId));
+    if(response.isSuccess){
+      _deleteCartItem(cartId);
+      isSuccess = true;
+    }else{
+      _errorMessage = response.errorMessage;
+    }
+    _inProgress = false;
+    update();
+    return isSuccess;
+  }
 }

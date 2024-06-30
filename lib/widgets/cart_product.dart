@@ -1,8 +1,10 @@
 import 'package:ecommerce_project/data/models/cart_list_item.dart';
+import 'package:ecommerce_project/presentation/state_holders/cart_list_controller.dart';
 import 'package:ecommerce_project/presentation/utils/app_color.dart';
 import 'package:ecommerce_project/presentation/utils/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 class CartProduct extends StatefulWidget {
@@ -138,7 +140,8 @@ class _CartProductState extends State<CartProduct> {
       color: AppColors.primaryColor,
       onChanged: (value) {
         _currentValue = value as int;
-        setState(() {});
+        Get.find<CartListController>()
+            .changeProductQuantity(widget.cartListItem.id!, _currentValue);
       },
     );
   }
