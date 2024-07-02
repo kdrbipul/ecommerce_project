@@ -197,7 +197,39 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     sizes: _selectedSizes ?? '',
                     quantity: _currentValue,
                   );
-                  addToCartController.getAddToCart(cartModel);
+                  addToCartController.getAddToCart(cartModel).then((result){
+                    if(result){
+                      Get.snackbar(
+                        "hi", "Added to cart",
+                        snackPosition: SnackPosition.TOP,
+                        showProgressIndicator: true,
+                        backgroundColor: AppColors.primaryColor,
+                        colorText: Colors.white,
+                        borderRadius: 5,
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
+                        icon: const Icon(Icons.ac_unit, color: Colors.white,),
+                        isDismissible: false,
+                        duration: const Duration(seconds: 3),
+                        animationDuration: const Duration(milliseconds: 600),
+                      );
+                    }else{
+                      Get.snackbar(
+                        "hi", addToCartController.errorMessage,
+                        snackPosition: SnackPosition.TOP,
+                        showProgressIndicator: true,
+                        backgroundColor: AppColors.primaryColor,
+                        colorText: Colors.white,
+                        borderRadius: 5,
+                        margin: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(5),
+                        icon: const Icon(Icons.ac_unit, color: Colors.white,),
+                        isDismissible: false,
+                        duration: const Duration(seconds: 3),
+                        animationDuration: const Duration(milliseconds: 600),
+                      );
+                    }
+                  });
                 },
                 child: const Text('Add To Cart'),
               );

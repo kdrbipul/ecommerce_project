@@ -8,7 +8,6 @@ class WishButton extends StatelessWidget {
     this.isSelected = false,
     required this.onTap,
   });
-
   final bool showAddToWishList;
   final bool isSelected;
   final VoidCallback onTap;
