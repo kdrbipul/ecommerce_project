@@ -160,6 +160,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             return null;
           }
         },
+
         controller: _otpTEController,
         keyboardType: TextInputType.number,
         length: 6,
